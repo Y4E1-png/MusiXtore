@@ -17,9 +17,6 @@ const store = configureStore({
     order: orderReducer,
     songs: songReducer,
   },
-  preloadedState: {
-    library: cargarBiblioteca(),
-  },
 });
 
 

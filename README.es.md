@@ -1,8 +1,8 @@
-# UR TUNES
+# MusiXtore
 
 [English](README.md) | **Español**
 
-UR TUNES es una aplicación de descubrimiento musical y biblioteca personal desarrollada con React. Busca un artista, explora sus canciones, consulta sus detalles y guarda tus favoritas en una biblioteca que se conserva después de recargar la página.
+MusiXtore es un proyecto de tienda musical en React que se está adaptando para conectarse a una API de back-end. Usa Vite para el desarrollo local y la compilación de producción.
 
 Este proyecto se desarrolló como parte del programa de Programador Front-End de EBAC. La interfaz de la aplicación está en español.
 
@@ -25,23 +25,21 @@ Este proyecto se desarrolló como parte del programa de Programador Front-End de
 | --- | --- |
 | Interfaz de usuario | React, styled-components |
 | Gestión del estado | Redux Toolkit, React Redux |
-| Enrutamiento | React Router |
 | Solicitudes HTTP | Axios |
-| Pruebas | Jest, React Testing Library |
-| Desarrollo y compilación | Create React App / react-scripts |
+| Desarrollo y compilación | Vite |
 
 ## Instalación y ejecución
 
 Necesitas tener Node.js y npm instalados en tu computadora.
 
 ```bash
-git clone https://github.com/Y4E1-png/Biblioteca-musical.git
-cd Biblioteca-musical
+git clone <url-de-tu-repositorio>
+cd MusiXtore
 npm ci
-npm start
+npm run dev
 ```
 
-Abre [http://localhost:3000](http://localhost:3000) en tu navegador. Se requiere conexión a internet para consultar los datos musicales y cargar las portadas.
+Abre en el navegador la dirección que indique Vite, normalmente [http://localhost:5173](http://localhost:5173).
 
 ## Uso
 
@@ -55,45 +53,24 @@ La biblioteca se guarda bajo la clave `biblioteca-musical` en `localStorage`. Pe
 
 Los datos musicales y las portadas provienen de [TheAudioDB](https://www.theaudiodb.com/). La información disponible depende de la respuesta de la API.
 
-## Pruebas
-
-Ejecuta las pruebas en modo interactivo, con seguimiento de cambios:
-
-```bash
-npm test
-```
-
-Para ejecutarlas una sola vez:
-
-```bash
-npm test -- --watchAll=false --runInBand
-```
-
-Las pruebas de la aplicación cubren el encabezado, el formulario de búsqueda, los estados de los resultados, las acciones de la biblioteca, la prevención de duplicados y los estados de carga y reintento de los detalles de una canción.
-
 ## Compilación para producción
 
 ```bash
 npm run build
 ```
 
-Los archivos de producción se generan en el directorio `build/`.
-
-Al publicar la aplicación, configura el alojamiento para servir `index.html` en las rutas gestionadas por el navegador, como `/song/:id`. Esto permite abrir directamente las páginas de detalles o recargarlas. La configuración actual de compilación supone que la aplicación se aloja en la raíz de un dominio.
+Los archivos de producción se generan en el directorio `dist/`.
 
 ## Estructura del proyecto
 
 ```text
-public/             Plantilla HTML, favicon y manifiesto de la aplicación
+index.html          Punto de entrada HTML de Vite
 src/
-  assets/           Recursos de marca
-  components/       Componentes del encabezado, búsqueda, biblioteca y detalles
-  hooks/            Hook reutilizable para consultar datos
-  redux/            Store y estados de búsqueda y biblioteca
-  styles/           Estilos globales y tema
-  __tests__/        Pruebas de componentes y de integración
-  App.js            Rutas principales de la aplicación
-  index.js          Punto de entrada y proveedores de la aplicación
+  api/              Cliente HTTP para la API del back-end
+  components/       Componentes de la aplicación y de la tienda
+  redux/            Estados de la aplicación
+  App.jsx           Componente raíz
+  main.jsx          Punto de entrada de Vite
 ```
 
 ## Autor

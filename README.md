@@ -1,8 +1,8 @@
-# UR TUNES
+# MusiXtore
 
 **English** | [Español](README.es.md)
 
-UR TUNES is a music discovery and personal library application built with React. Search for an artist, explore their songs, view track details, and save your favorites in a library that stays available after a page reload.
+MusiXtore is a React music-store project being adapted to work with a back-end API. It uses Vite for local development and production builds.
 
 This project was developed as part of the EBAC Front-End Developer program. The application interface is in Spanish.
 
@@ -25,23 +25,21 @@ This project was developed as part of the EBAC Front-End Developer program. The 
 | --- | --- |
 | User interface | React, styled-components |
 | State management | Redux Toolkit, React Redux |
-| Routing | React Router |
 | HTTP requests | Axios |
-| Testing | Jest, React Testing Library |
-| Development and build | Create React App / react-scripts |
+| Development and build | Vite |
 
 ## Getting Started
 
 You need Node.js and npm installed on your computer.
 
 ```bash
-git clone https://github.com/Y4E1-png/Biblioteca-musical.git
-cd Biblioteca-musical
+git clone <your-repository-url>
+cd MusiXtore
 npm ci
-npm start
+npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser. An internet connection is needed to retrieve music data and artwork.
+Open the address printed by Vite in your browser, normally [http://localhost:5173](http://localhost:5173).
 
 ## Usage
 
@@ -55,45 +53,24 @@ The saved library is stored under the `biblioteca-musical` key in `localStorage`
 
 Music metadata and artwork come from [TheAudioDB](https://www.theaudiodb.com/). Available information depends on the API response.
 
-## Testing
-
-Run the test suite in watch mode:
-
-```bash
-npm test
-```
-
-Run it once without watch mode:
-
-```bash
-npm test -- --watchAll=false --runInBand
-```
-
-The application tests cover the header, search form, result states, library actions, duplicate prevention, and song detail loading and retry behavior.
-
 ## Production Build
 
 ```bash
 npm run build
 ```
 
-The production files are generated in the `build/` directory.
-
-When deploying, configure the host to serve `index.html` for client-side routes such as `/song/:id`. This allows detail pages to work when opened directly or refreshed. The current build configuration assumes the application is hosted at the root of a domain.
+The production files are generated in the `dist/` directory.
 
 ## Project Structure
 
 ```text
-public/             HTML template, favicon, and web app manifest
+index.html          Vite HTML entry point
 src/
-  assets/           Brand assets
-  components/       Header, search, library, and song detail components
-  hooks/            Reusable data-fetching hook
-  redux/            Store, search state, and library state
-  styles/           Global styles and theme
-  __tests__/        Component and integration tests
-  App.js            Main application routes
-  index.js          Application entry point and providers
+  api/              HTTP client for the back-end API
+  components/       Application and store components
+  redux/            Application state slices
+  App.jsx           Root component
+  main.jsx          Vite application entry point
 ```
 
 ## Author

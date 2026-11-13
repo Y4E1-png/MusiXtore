@@ -16,9 +16,12 @@ const SongsList = () => {
 
   return (
     <List>
-      {items.map((song) => {
+      {items.map((song) => (
         <SongCard key={song.id} song={song} />
-      })}
+      ))}
     </List>
   )
 }
+
+
+export default SongsList;
