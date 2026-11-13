@@ -4,7 +4,7 @@ import api from '../../api';
 
 export const fetchSongs = createAsyncThunk('search/fetchSongs', async () => {
 
-  const albumsResponse = await api.get(`/songs`);
+  const albumsResponse = await api.get(`/songs/`);
 
   return albumsResponse.data;
   
