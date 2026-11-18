@@ -1,81 +1,55 @@
 # MusiXtore
 
-[English](README.md) | **Español**
+[English](README.md) · **Español**
 
-MusiXtore es un proyecto de tienda musical en React que se está adaptando para conectarse a una API de back-end. Usa Vite para el desarrollo local y la compilación de producción.
+MusiXtore es un pryecto que conecta una tienda musical en React con una API REST en Django. Explora y filtra el catálogo, agrega canciones al carrito, registra un usuario de prueba y realiza un pedido. El inicio de sesión y el pago son simulados. El registro y los pedidos se guardan en PostgreSQL.
 
-Este proyecto se desarrolló como parte del programa de Programador Front-End de EBAC. La interfaz de la aplicación está en español.
-
-[Demo en línea](https://urtunes.web.app)
-
-## Funcionalidades
-
-- Busca canciones por artista mediante TheAudioDB.
-- Muestra resultados con la portada del álbum, el título de la canción, el artista, el álbum y la duración.
-- Permite abrir una página de detalles de la canción y regresar a la vista principal.
-- Agrega canciones a una biblioteca personal, evita duplicados y permite eliminar canciones guardadas.
-- Recupera la biblioteca desde el `localStorage` del navegador cuando se inicia la aplicación.
-- Presenta estados de carga, vacíos y de error, con opciones para reintentar las solicitudes fallidas.
-- Ofrece una interfaz adaptable con tema oscuro, acentos cálidos y diseños diferentes para los resultados de búsqueda y las canciones guardadas.
-- Incluye controles con etiquetas accesibles e indicadores visibles de foco al navegar con el teclado.
-
-## Tecnologías
-
-| Área | Herramientas |
+| Carpeta | Qué contiene |
 | --- | --- |
-| Interfaz de usuario | React, styled-components |
-| Gestión del estado | Redux Toolkit, React Redux |
-| Solicitudes HTTP | Axios |
-| Desarrollo y compilación | Vite |
+| [front-end/](front-end/) | React, Vite, Redux Toolkit y Axios |
+| [back-end/](back-end/) | Django REST Framework, PostgreSQL y Docker Compose |
 
-## Instalación y ejecución
+## Levantar el backend
 
-Necesitas tener Node.js y npm instalados en tu computadora.
+Abre Docker Desktop. Desde la raíz del repositorio, ejecuta:
 
 ```bash
-git clone <url-de-tu-repositorio>
-cd MusiXtore
+cd back-end
+cp -n .env.example .env
+```
+
+En `back-end/.env`, configura estos valores. El primero es el puerto expuesto en tu computadora y el segundo es el puerto donde escucha Django dentro de Docker.
+
+```dotenv
+DOCKER_WEB_PORT_FORWARD=8001
+PORT=8000
+```
+
+Después, desde `back-end/`, ejecuta:
+
+```bash
+docker compose up --build -d web postgres redis
+docker compose exec web python manage.py migrate
+```
+
+Abre la [API de canciones](http://localhost:8001/api/songs/) para comprobar que Django responde. Si el catálogo está vacío, agrega una canción de ejemplo desde el formulario de la API navegable.
+
+## Levantar el frontend
+
+En otra terminal, desde la raíz del repositorio, ejecuta:
+
+```bash
+cd front-end
 npm ci
 npm run dev
 ```
 
-Abre en el navegador la dirección que indique Vite, normalmente [http://localhost:5173](http://localhost:5173).
+Abre [http://localhost:5173](http://localhost:5173). El frontend envía las peticiones a `http://localhost:8001/api`. Ejecuta `npm run build` desde `front-end/` para generar la compilación de producción en `dist/`.
 
-## Uso
+## Probar el checkout
 
-1. Escribe el nombre de un artista en el campo de búsqueda y selecciona el icono de lupa.
-2. Explora las canciones y selecciona **Agregar a mi biblioteca** para guardar una canción.
-3. Selecciona el botón de tres puntos de un resultado para abrir su página de detalles.
-4. Usa la flecha de regreso para volver a la vista principal.
-5. Elimina una canción guardada mediante el botón **×** de su tarjeta en la biblioteca.
+1. Agrega una canción al carrito y continúa al pago.
+2. Escribe datos de pago ficticios y revisa el pedido.
+3. Confirma la compra. Una vez que Django guarda el pedido, la pantalla final muestra las canciones compradas y se vacía el carrito.
 
-La biblioteca se guarda bajo la clave `biblioteca-musical` en `localStorage`. Pertenece al navegador y a la dirección del sitio que se están utilizando. Los resultados de búsqueda se mantienen en memoria, mientras que las canciones guardadas se conservan entre visitas.
-
-Los datos musicales y las portadas provienen de [TheAudioDB](https://www.theaudiodb.com/). La información disponible depende de la respuesta de la API.
-
-## Compilación para producción
-
-```bash
-npm run build
-```
-
-Los archivos de producción se generan en el directorio `dist/`.
-
-## Estructura del proyecto
-
-```text
-index.html          Punto de entrada HTML de Vite
-src/
-  api/              Cliente HTTP para la API del back-end
-  components/       Componentes de la aplicación y de la tienda
-  redux/            Estados de la aplicación
-  App.jsx           Componente raíz
-  main.jsx          Punto de entrada de Vite
-```
-
-## Autor
-
-**Yael Aguilar**
-
-- [GitHub](https://github.com/Y4E1-png)
-- [LinkedIn](https://www.linkedin.com/in/dyael-aguilar)
+Usa datos ficticios al probar el registro y el checkout.
