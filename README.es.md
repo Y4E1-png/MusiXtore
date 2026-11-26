@@ -2,7 +2,7 @@
 
 [English](README.md) · **Español**
 
-MusiXtore es un pryecto que conecta una tienda musical en React con una API REST en Django. Explora y filtra el catálogo, agrega canciones al carrito, registra un usuario de prueba y realiza un pedido. El inicio de sesión y el pago son simulados. El registro y los pedidos se guardan en PostgreSQL.
+MusiXtore es un proyecto que conecta una tienda musical en React con una API REST en Django. Explora y filtra el catálogo, agrega canciones al carrito, registra un usuario de prueba y realiza un pedido. El inicio de sesión y el pago son simulados. El registro y los pedidos se guardan en PostgreSQL.
 
 | Carpeta | Qué contiene |
 | --- | --- |
